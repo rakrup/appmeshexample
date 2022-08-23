@@ -1,0 +1,11 @@
+apiVersion: appmesh.k8s.aws/v1beta2
+kind: VirtualService
+metadata:
+  name: podinfo-service
+  namespace: mesh-workload
+spec:
+  awsName: podinfo-service-virtual-service
+  provider:
+    virtualRouter:
+      virtualRouterRef:
+        name: podinfo-service

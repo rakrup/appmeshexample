@@ -1,0 +1,21 @@
+apiVersion: appmesh.k8s.aws/v1beta2
+kind: VirtualRouter
+metadata:
+  namespace: mesh-workload
+  name: podinfo-service
+spec:
+  awsName: podinfo-service-virtual-router
+  listeners:
+    - portMapping:
+        port: 9898
+        protocol: http
+  routes:
+    - name: route
+      httpRoute:
+        match:
+          prefix: /
+        action:
+          weightedTargets:
+            - virtualNodeRef:
+                name: podinfo-service
+              weight: 1

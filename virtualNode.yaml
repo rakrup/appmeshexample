@@ -1,0 +1,17 @@
+apiVersion: appmesh.k8s.aws/v1beta2
+kind: VirtualNode
+metadata:
+  name: podinfo-service
+  namespace: mesh-workload
+spec:
+  awsName: podinfo-service-virtual-node
+  podSelector:
+    matchLabels:
+      app: podinfo-service
+  listeners:
+    - portMapping:
+        port: 9898
+        protocol: http
+  serviceDiscovery:
+    dns:
+      hostname: podinfo-service.mesh-workload.svc.cluster.local
